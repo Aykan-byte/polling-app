@@ -15,7 +15,7 @@ public interface IStudentService {
 
     public  DtoStudent saveStudent(Student student);
     public DtoStudent deleteStudent(Long id);
-    public DtoStudent loginStudent(Long id,String password);
+    public DtoStudent loginStudent(String id,String password);
 
 
 }

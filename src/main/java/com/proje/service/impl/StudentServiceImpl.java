@@ -2,6 +2,9 @@ package com.proje.service.impl;
 
 import com.proje.dto.DtoStudent;
 import com.proje.dto.DtoTeacher;
+import com.proje.exception.BaseException;
+import com.proje.exception.ErrorMessage;
+import com.proje.exception.MessageType;
 import com.proje.model.Student;
 import com.proje.model.Teacher;
 import com.proje.repository.PollingStudentRepository;
@@ -70,24 +73,27 @@ public class StudentServiceImpl implements IStudentService {
         return dtoStudent;
     }
     @Override
-    public DtoStudent loginStudent(Long id, String password) {
-
+    public DtoStudent loginStudent(String id, String password) {
         List<Student> listStudent = pollingStudentRepository.findAll();
         DtoStudent dtoStudent = new DtoStudent();
-        for (Student student:listStudent){
-            if (student.getId().equals(id) && student.getPassword().equals(password)){
-                BeanUtils.copyProperties(student,dtoStudent);
-                return dtoStudent;
 
 
-            }
 
+        if(id.isEmpty()){
+            throw new BaseException(new ErrorMessage(MessageType.NO_USERNAME,id));
+        } else if (password.isEmpty()) {
+
+            throw new BaseException(new ErrorMessage(MessageType.NO_PASSWORD,password));
         }
 
-        return null;
+        for (Student student : listStudent) {
+            if (student.getId().toString().equals(id) && student.getPassword().equals(password)) {
+                BeanUtils.copyProperties(student, dtoStudent);
+                return dtoStudent;
 
-
+            }
+        }
+        throw new BaseException(new ErrorMessage(MessageType.USERNAME_OR_PASSWORD, id));
     }
-
 
 }
