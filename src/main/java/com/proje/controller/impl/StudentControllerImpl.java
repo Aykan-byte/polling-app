@@ -40,5 +40,14 @@ public class StudentControllerImpl implements IStudentController {
         return  pollingService.deleteStudent(id);
     }
 
+    @Override
+    @GetMapping("/login/{id}&{password}")
+    public DtoStudent loginStudent(@PathVariable(value = "id") Long id, @PathVariable(value = "password") String password) {
+
+        return pollingService.loginStudent(id,password);
+    }
+
+
+
 
 }

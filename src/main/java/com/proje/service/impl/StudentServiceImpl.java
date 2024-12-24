@@ -69,6 +69,25 @@ public class StudentServiceImpl implements IStudentService {
         BeanUtils.copyProperties(student, dtoStudent);
         return dtoStudent;
     }
+    @Override
+    public DtoStudent loginStudent(Long id, String password) {
+
+        List<Student> listStudent = pollingStudentRepository.findAll();
+        DtoStudent dtoStudent = new DtoStudent();
+        for (Student student:listStudent){
+            if (student.getId().equals(id) && student.getPassword().equals(password)){
+                BeanUtils.copyProperties(student,dtoStudent);
+                return dtoStudent;
+
+
+            }
+
+        }
+
+        return null;
+
+
+    }
 
 
 }
