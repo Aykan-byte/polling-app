@@ -41,7 +41,7 @@ public class StudentControllerImpl implements IStudentController {
     }
 
     @Override
-    @GetMapping("/login/{id}&{password}")
+    @GetMapping("/student/login/{id}&{password}")
     public DtoStudent loginStudent(@PathVariable(value = "id") String id, @PathVariable(value = "password") String password) {
 
         return pollingService.loginStudent(id,password);

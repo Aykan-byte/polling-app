@@ -1,6 +1,11 @@
 package com.proje.service.impl;
 
+import com.proje.dto.DtoStudent;
 import com.proje.dto.DtoTeacher;
+import com.proje.exception.BaseException;
+import com.proje.exception.ErrorMessage;
+import com.proje.exception.MessageType;
+import com.proje.model.Student;
 import com.proje.model.Teacher;
 import com.proje.repository.PollingTeacherRepository;
 import com.proje.service.ITeacherService;
@@ -61,5 +66,28 @@ public class TeacherServiceImpl implements ITeacherService {
 
         return dtoTeacher;
 
+    }
+    @Override
+    public DtoTeacher loginTeacher(String email, String password) {
+        List<Teacher> listTeacher = pollingTeacherRepository.findAll();
+        DtoTeacher dtoTeacher = new DtoTeacher();
+
+
+
+        if(email.isBlank()){
+            throw new BaseException(new ErrorMessage(MessageType.NO_USERNAME,email));
+        } else if (password.isBlank()) {
+
+            throw new BaseException(new ErrorMessage(MessageType.NO_PASSWORD,password));
+        }
+
+        for (Teacher teacher : listTeacher) {
+            if (teacher.getEmail().equals(email) && teacher.getPassword().equals(password)) {
+                BeanUtils.copyProperties(teacher, dtoTeacher);
+                return dtoTeacher;
+
+            }
+        }
+        throw new BaseException(new ErrorMessage(MessageType.USERNAME_OR_PASSWORD, email));
     }
 }

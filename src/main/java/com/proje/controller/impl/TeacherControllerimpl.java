@@ -1,6 +1,7 @@
 package com.proje.controller.impl;
 
 import com.proje.controller.ITeacherController;
+import com.proje.dto.DtoStudent;
 import com.proje.dto.DtoTeacher;
 import com.proje.model.Teacher;
 
@@ -38,4 +39,9 @@ public class TeacherControllerimpl implements ITeacherController {
     public DtoTeacher deleteTeacher(@PathVariable(value = "id") Long id) {
         return pollingService.deleteTeacher(id);
     }
-}
+    @Override
+    @GetMapping("/teacher/login/{email}&{password}")
+    public DtoTeacher loginTeacher(@PathVariable(value = "email") String email, @PathVariable(value = "password") String password) {
+
+        return pollingService.loginTeacher(email,password);
+    }}
