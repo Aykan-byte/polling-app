@@ -21,7 +21,6 @@ public class StudentControllerImpl implements IStudentController {
     public DtoStudent findStudentById(@PathVariable(value = "id") Long id) {
         return pollingService.findStudentById(id);
     }
-
     @Override
     @GetMapping(path = "/student/list")
     public List<DtoStudent> getAllStudents() {
@@ -46,8 +45,4 @@ public class StudentControllerImpl implements IStudentController {
 
         return pollingService.loginStudent(id,password);
     }
-
-
-
-
 }

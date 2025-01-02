@@ -1,11 +1,12 @@
 package com.proje.model;
 
-import com.proje.dto.DtoTeacher;
 import jakarta.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "classes")
 public class Lesson {
+
     @Id
     @Column(name = "class_id")
     private String classId;
@@ -16,17 +17,29 @@ public class Lesson {
     @Column(name = "department")
     private String department;
 
-
     @ManyToOne
     @JoinColumn(name = "teacher_id", nullable = false)
     private Teacher teacherId;
 
-    public String getId() {
+    @OneToMany(mappedBy = "lesson")
+    private Set<Attendance> attendances;
+
+
+    public Lesson() {}
+
+    public Lesson(String classId, String className, String department, Teacher teacher) {
+        this.classId = classId;
+        this.className = className;
+        this.department = department;
+        this.teacherId = teacher;
+    }
+
+    public String getClassId() {
         return classId;
     }
 
-    public void setId(String id) {
-        this.classId = id;
+    public void setClassId(String classId) {
+        this.classId = classId;
     }
 
     public String getClassName() {
@@ -45,14 +58,6 @@ public class Lesson {
         this.department = department;
     }
 
-    public String getClassId() {
-        return classId;
-    }
-
-    public void setClassId(String classId) {
-        this.classId = classId;
-    }
-
     public Teacher getTeacher() {
         return teacherId;
     }
@@ -61,13 +66,11 @@ public class Lesson {
         this.teacherId = teacher;
     }
 
-    public Lesson() {
+    public Set<Attendance> getStudentLessons() {
+        return attendances;
     }
 
-    public Lesson(String classId, String className, String department, Teacher teacher) {
-        this.classId = classId;
-        this.className = className;
-        this.department = department;
-        this.teacherId = teacher;
+    public void setStudentLessons(Set<Attendance> attendances) {
+        this.attendances = attendances;
     }
 }

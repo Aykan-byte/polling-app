@@ -1,6 +1,5 @@
 package com.proje.service;
 
-import com.proje.dto.DtoLesson;
 import com.proje.model.Lesson;
 
 import java.util.List;

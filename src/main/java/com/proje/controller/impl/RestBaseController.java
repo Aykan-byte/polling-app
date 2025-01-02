@@ -8,12 +8,8 @@ public class RestBaseController implements IRestBaseController {
 
         return RootEntity.ok(data);
     }
-
     public <T>RootEntity<T>error(String errorMessage){
 
         return RootEntity.error(errorMessage);
     }
-
-
-
 }

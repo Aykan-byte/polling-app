@@ -17,5 +17,4 @@ public interface IStudentService {
     public DtoStudent deleteStudent(Long id);
     public DtoStudent loginStudent(String id,String password);
 
-
 }

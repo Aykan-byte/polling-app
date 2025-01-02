@@ -4,7 +4,6 @@ import com.proje.exception.BaseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 
@@ -30,10 +29,7 @@ public class GlobalExceptionHandler {
         exception.setPath(request.getDescription(false).substring(4));
         exception.setMessage(message);
 
-
         apiError.setException(exception);
-
-
         return apiError;
     }
     private String getHostName(){

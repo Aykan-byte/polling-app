@@ -7,7 +7,6 @@ public class RootEntity<T> {
 
     private T data;
 
-
     public static <T>RootEntity<T> ok(T data){
 
         RootEntity<T>rootEntity=new RootEntity<>();

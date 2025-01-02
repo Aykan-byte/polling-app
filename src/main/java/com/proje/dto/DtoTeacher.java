@@ -1,12 +1,9 @@
 package com.proje.dto;
 
-import jakarta.persistence.Column;
-
 public class DtoTeacher {
 
     private String name;
     private String department;
-
 
     public String getName() {
         return name;
@@ -26,7 +23,6 @@ public class DtoTeacher {
 
     public DtoTeacher() {
     }
-
     public DtoTeacher(String name, String department) {
         this.name = name;
         this.department = department;

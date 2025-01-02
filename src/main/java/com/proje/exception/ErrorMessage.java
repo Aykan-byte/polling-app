@@ -4,8 +4,6 @@ public class ErrorMessage {private MessageType messageType;
 
     private String ofStatic;
 
-
-
     public String prepareErrorMessage(){
 
         StringBuilder builder = new StringBuilder();
@@ -14,7 +12,6 @@ public class ErrorMessage {private MessageType messageType;
             builder.append(" : " + ofStatic);
         }
         return builder.toString();
-
     }
 
     public MessageType getMessageType() {

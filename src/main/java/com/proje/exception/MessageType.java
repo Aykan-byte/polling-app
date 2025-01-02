@@ -6,7 +6,6 @@ public enum MessageType {
     NO_USERNAME("02","KULLANICI ADINIZI GİRİNİZ"),
     NO_PASSWORD("03","ŞİFRENİZİ GİRİNİZ");
 
-
     private String code;
     private String message;
 

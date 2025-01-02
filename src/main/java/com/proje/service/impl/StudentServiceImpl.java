@@ -1,18 +1,17 @@
 package com.proje.service.impl;
 
 import com.proje.dto.DtoStudent;
-import com.proje.dto.DtoTeacher;
 import com.proje.exception.BaseException;
 import com.proje.exception.ErrorMessage;
 import com.proje.exception.MessageType;
 import com.proje.model.Student;
-import com.proje.model.Teacher;
 import com.proje.repository.PollingStudentRepository;
-import com.proje.repository.PollingTeacherRepository;
 import com.proje.service.IStudentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +23,6 @@ public class StudentServiceImpl implements IStudentService {
 
     @Autowired
     private PollingStudentRepository pollingStudentRepository;
-
-
 
     @Override
     public DtoStudent findStudentById(Long id) {
@@ -52,7 +49,6 @@ public class StudentServiceImpl implements IStudentService {
         return dtoList;
     }
 
-
     @Override
     public  DtoStudent saveStudent(Student student) {
         DtoStudent dtoStudent = new DtoStudent();
@@ -76,24 +72,21 @@ public class StudentServiceImpl implements IStudentService {
     public DtoStudent loginStudent(String id, String password) {
         List<Student> listStudent = pollingStudentRepository.findAll();
         DtoStudent dtoStudent = new DtoStudent();
-
-
-
-        if(id.isEmpty()){
-            throw new BaseException(new ErrorMessage(MessageType.NO_USERNAME,id));
+        if (id.isEmpty()) {
+            throw new BaseException(new ErrorMessage(MessageType.NO_USERNAME, id));
         } else if (password.isEmpty()) {
-
-            throw new BaseException(new ErrorMessage(MessageType.NO_PASSWORD,password));
+            throw new BaseException(new ErrorMessage(MessageType.NO_PASSWORD, password));
         }
-
         for (Student student : listStudent) {
             if (student.getId().toString().equals(id) && student.getPassword().equals(password)) {
                 BeanUtils.copyProperties(student, dtoStudent);
-                return dtoStudent;
 
+                // Session'a ekleme
+                RequestContextHolder.getRequestAttributes().setAttribute("studentId", student.getId(), RequestAttributes.SCOPE_SESSION);
+
+                return dtoStudent;
             }
         }
         throw new BaseException(new ErrorMessage(MessageType.USERNAME_OR_PASSWORD, id));
     }
-
 }

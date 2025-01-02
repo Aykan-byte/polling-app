@@ -1,11 +1,9 @@
 package com.proje.controller.impl;
 
 import com.proje.controller.ILessonController;
-import com.proje.dto.DtoLesson;
 import com.proje.model.Lesson;
 import com.proje.service.impl.LessonServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +19,6 @@ public class LessonController implements ILessonController {
     public Lesson findLessonById(@PathVariable(value = "id") String id) {
         return lessonService.findLessonById(id);
     }
-
 
     @Override
     @GetMapping(path = "/lesson/list")

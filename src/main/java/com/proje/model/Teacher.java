@@ -68,13 +68,8 @@ public class Teacher {
         this.password = password;
     }
 
-
-
-
-
     public Teacher() {
     }
-
     public Teacher(Long teacherId, String name, String department, String email, String password, List<Lesson> lessons) {
         this.teacherId = teacherId;
         this.name = name;
